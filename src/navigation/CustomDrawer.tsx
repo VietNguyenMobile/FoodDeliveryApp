@@ -33,9 +33,14 @@ export type DrawerParamType = {
 
 const Drawer = createDrawerNavigator<DrawerParamType>();
 
-const CustomDrawerItem = ({ label, icon, onPress }) => {
+const CustomDrawerItem = ({ label, icon, onPress, isFocused }) => {
   return (
-    <TouchableOpacity style={styles.drawerItem} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.drawerItem,
+        { backgroundColor: isFocused ? COLORS.transparentBlack1 : null },
+      ]}
+      onPress={onPress}>
       <Image style={styles.drawerImage} source={icon} />
       <Text style={styles.drawerItemLabel}>{label}</Text>
     </TouchableOpacity>
@@ -54,7 +59,7 @@ const CustomDrawerContent = ({
   );
   const dispatch: AppDispatch = useDispatch();
 
-  console.log('selectedTab: ', selectedTab);
+  // console.log('selectedTab: ', selectedTab);
 
   return (
     <DrawerContentScrollView
@@ -89,6 +94,7 @@ const CustomDrawerContent = ({
           <CustomDrawerItem
             label={constants.screens.home}
             icon={icons.home}
+            isFocused={selectedTab === constants.screens.home}
             onPress={() => {
               // setSelectedTab(constants.screens.home);
               console.log('setTabSelected: ', constants.screens.home);
@@ -99,24 +105,95 @@ const CustomDrawerContent = ({
           <CustomDrawerItem
             label={constants.screens.myWallet}
             icon={icons.wallet}
+            isFocused={selectedTab === constants.screens.myWallet}
+            onPress={() => {
+              // setSelectedTab(constants.screens.home);
+              // console.log('setTabSelected: ', constants.screens.myWallet);
+              dispatch(setTabSelected(constants.screens.myWallet));
+              // navigation.navigate('MainLayout');
+            }}
           />
           <CustomDrawerItem
             label={constants.screens.notification}
             icon={icons.notification}
+            isFocused={selectedTab === constants.screens.notification}
+            onPress={() => {
+              // setSelectedTab(constants.screens.home);
+              console.log('setTabSelected: ', constants.screens.notification);
+              dispatch(setTabSelected(constants.screens.notification));
+              // navigation.navigate('MainLayout');
+            }}
           />
           <CustomDrawerItem
             label={constants.screens.favourite}
             icon={icons.favourite}
+            isFocused={selectedTab === constants.screens.favourite}
+            onPress={() => {
+              // setSelectedTab(constants.screens.home);
+              console.log('setTabSelected: ', constants.screens.favourite);
+              dispatch(setTabSelected(constants.screens.favourite));
+              // navigation.navigate('MainLayout');
+            }}
           />
 
           {/* Line Divider */}
           <View style={styles.lineDivider} />
 
-          <CustomDrawerItem label={'Track Tour Order'} icon={icons.location} />
-          <CustomDrawerItem label={'Coupons'} icon={icons.coupon} />
-          <CustomDrawerItem label={'Settings'} icon={icons.setting} />
-          <CustomDrawerItem label={'Invite a Friend'} icon={icons.profile} />
-          <CustomDrawerItem label={'Help Center'} icon={icons.help} />
+          <CustomDrawerItem
+            label={'Track Tour Order'}
+            icon={icons.location}
+            // isFocused={selectedTab === constants.screens.home}
+            // onPress={() => {
+            //   // setSelectedTab(constants.screens.home);
+            //   console.log('setTabSelected: ', constants.screens.home);
+            //   dispatch(setTabSelected(constants.screens.home));
+            //   navigation.navigate('MainLayout');
+            // }}
+          />
+          <CustomDrawerItem
+            label={'Coupons'}
+            icon={icons.coupon}
+            // isFocused={selectedTab === constants.screens.home}
+            // onPress={() => {
+            //   // setSelectedTab(constants.screens.home);
+            //   console.log('setTabSelected: ', constants.screens.home);
+            //   dispatch(setTabSelected(constants.screens.home));
+            //   navigation.navigate('MainLayout');
+            // }}
+          />
+          <CustomDrawerItem
+            label={'Settings'}
+            icon={icons.setting}
+            // isFocused={selectedTab === constants.screens.home}
+            // onPress={() => {
+            //   // setSelectedTab(constants.screens.home);
+            //   console.log('setTabSelected: ', constants.screens.home);
+            //   dispatch(setTabSelected(constants.screens.home));
+            //   navigation.navigate('MainLayout');
+            // }}
+          />
+          <CustomDrawerItem
+            label={'Invite a Friend'}
+            icon={icons.profile}
+            // isFocused={selectedTab === constants.screens.home}
+            // onPress={() => {
+            //   // setSelectedTab(constants.screens.home);
+            //   console.log('setTabSelected: ', constants.screens.home);
+            //   dispatch(setTabSelected(constants.screens.home));
+            //   navigation.navigate('MainLayout');
+            // }}
+          />
+          <CustomDrawerItem
+            label={'Help Center'}
+            icon={icons.help}
+            // isFocused={selectedTab === constants.screens.home}
+            // onPress={() => {
+            //   // setSelectedTab(constants.screens.home);
+            //   console.log('setTabSelected: ', constants.screens.home);
+            //   dispatch(setTabSelected(constants.screens.home));
+            //   navigation.navigate('MainLayout');
+            // }}
+          />
         </View>
 
         <View style={{ marginBottom: SIZES.padding }}>
