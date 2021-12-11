@@ -18,9 +18,9 @@ const MainLayout = ({ props }) => {
   //   console.log('isDrawerOpen: ', isDrawerOpen);
   useEffect(() => {
     if (isDrawerOpen === 'open') {
-      sv.value = withTiming(0.6);
+      sv.value = withTiming(0.6, { duration: 50 });
     } else {
-      sv.value = withTiming(0);
+      sv.value = withTiming(0, { duration: 200 });
     }
   }, [isDrawerOpen]);
 

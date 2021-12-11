@@ -11,6 +11,9 @@ import {
   DrawerContentScrollView,
   useDrawerProgress,
 } from '@react-navigation/drawer';
+import { useDispatch, useSelector } from 'react-redux';
+// import { connect } from 'react-redux';
+// import { setSelectedTab } from '../stores/tab/tabActions';
 import { MainLayout } from '../screens';
 import {
   COLORS,
@@ -21,24 +24,38 @@ import {
   dummyData,
 } from '../constants';
 
+import { RootState, AppDispatch } from '../stores/types';
+import { setTabSelected } from '../stores/slices/tabSlice';
+
 export type DrawerParamType = {
   MainLayout: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamType>();
 
-const CustomDrawerItem = ({ label, icon }) => {
+const CustomDrawerItem = ({ label, icon, onPress }) => {
   return (
-    <TouchableOpacity style={styles.drawerItem}>
+    <TouchableOpacity style={styles.drawerItem} onPress={onPress}>
       <Image style={styles.drawerImage} source={icon} />
       <Text style={styles.drawerItemLabel}>{label}</Text>
     </TouchableOpacity>
   );
 };
 
-const CustomDrawerContent = ({ navigation }) => {
+const CustomDrawerContent = ({
+  navigation,
+  //  selectedTab, setSelectedTab
+}) => {
   // const progress = useDrawerProgress();
   // console.log('progress: ', progress);
+
+  const selectedTab = useSelector<RootState, string>(
+    state => state.tab.selectedTab,
+  );
+  const dispatch: AppDispatch = useDispatch();
+
+  console.log('selectedTab: ', selectedTab);
+
   return (
     <DrawerContentScrollView
       scrollEnabled={true}
@@ -69,7 +86,16 @@ const CustomDrawerContent = ({ navigation }) => {
         {/* Drawer Items */}
 
         <View style={styles.containerDrawerItem}>
-          <CustomDrawerItem label={constants.screens.home} icon={icons.home} />
+          <CustomDrawerItem
+            label={constants.screens.home}
+            icon={icons.home}
+            onPress={() => {
+              // setSelectedTab(constants.screens.home);
+              console.log('setTabSelected: ', constants.screens.home);
+              dispatch(setTabSelected(constants.screens.home));
+              navigation.navigate('MainLayout');
+            }}
+          />
           <CustomDrawerItem
             label={constants.screens.myWallet}
             icon={icons.wallet}
@@ -101,7 +127,7 @@ const CustomDrawerContent = ({ navigation }) => {
   );
 };
 
-const CustomDrawer = () => {
+const CustomDrawer = ({ selectedTab, setSelectedTab }) => {
   // const [progress, setProgress] = useState(new Animated.Value(0));
 
   // const scale = Animated.interpolateNode(progress, {
@@ -154,7 +180,13 @@ const CustomDrawer = () => {
           //   // useSharedValue()
           // }, 0);
 
-          return <CustomDrawerContent navigation={props.navigation} />;
+          return (
+            <CustomDrawerContent
+              navigation={props.navigation}
+              // selectedTab={selectedTab}
+              // setSelectedTab={setSelectedTab}
+            />
+          );
         }}>
         <Drawer.Screen name="MainLayout">
           {props => (
@@ -249,3 +281,19 @@ const styles = StyleSheet.create({
 });
 
 export default CustomDrawer;
+
+function mapStateToProps(state) {
+  return {
+    selectedTab: state.tabReducer.selectedTab,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSelectedTab: selectedTab => {
+      return dispatch(setSelectedTab(selectedTab));
+    },
+  };
+}
+
+// export default connect(mapStateToProps, mapDispatchToProps)(CustomDrawer);
