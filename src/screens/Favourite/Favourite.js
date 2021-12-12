@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    View,
+    View, Text
 } from 'react-native';
 
 const Favourite = () => {

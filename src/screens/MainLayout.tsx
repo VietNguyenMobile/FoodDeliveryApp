@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   View,
@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedback,
   Image,
   FlatList,
+  Platform,
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -36,6 +37,7 @@ import {
 const MainLayout = ({ navigation }) => {
   //   console.log('drawerAnimatedStyle: ', drawerAnimatedStyle);
 
+  const flatListRef = useRef<FlatList<any>>();
   const isDrawerOpen = useDrawerStatus();
   const sv = useSharedValue(0);
   //   console.log('isDrawerOpen: ', isDrawerOpen);
@@ -142,6 +144,7 @@ const MainLayout = ({ navigation }) => {
 
   useEffect(() => {
     if (selectedTab == constants.screens.home) {
+      flatListRef?.current?.scrollToIndex({ index: 0, animated: false });
       homeTabFlex.value = withTiming(4, { duration: 500 });
       homeTabColor.value = withTiming(COLORS.primary, { duration: 500 });
     } else {
@@ -150,6 +153,7 @@ const MainLayout = ({ navigation }) => {
     }
 
     if (selectedTab == constants.screens.search) {
+      flatListRef?.current?.scrollToIndex({ index: 1, animated: false });
       searchTabFlex.value = withTiming(4, { duration: 500 });
       searchTabColor.value = withTiming(COLORS.primary, { duration: 500 });
     } else {
@@ -158,6 +162,7 @@ const MainLayout = ({ navigation }) => {
     }
 
     if (selectedTab == constants.screens.cart) {
+      flatListRef?.current?.scrollToIndex({ index: 2, animated: false });
       cartTabFlex.value = withTiming(4, { duration: 500 });
       cartTabColor.value = withTiming(COLORS.primary, { duration: 500 });
     } else {
@@ -166,6 +171,7 @@ const MainLayout = ({ navigation }) => {
     }
 
     if (selectedTab == constants.screens.favourite) {
+      flatListRef?.current?.scrollToIndex({ index: 3, animated: false });
       favouriteTabFlex.value = withTiming(4, { duration: 500 });
       favouriteTabColor.value = withTiming(COLORS.primary, { duration: 500 });
     } else {
@@ -174,6 +180,7 @@ const MainLayout = ({ navigation }) => {
     }
 
     if (selectedTab == constants.screens.notification) {
+      flatListRef?.current?.scrollToIndex({ index: 4, animated: false });
       notificationTabFlex.value = withTiming(4, { duration: 500 });
       notificationTabColor.value = withTiming(COLORS.primary, {
         duration: 500,
@@ -182,7 +189,7 @@ const MainLayout = ({ navigation }) => {
       notificationTabFlex.value = withTiming(1, { duration: 500 });
       notificationTabColor.value = withTiming(COLORS.white, { duration: 500 });
     }
-  }, [selectedTab]);
+  }, [selectedTab, flatListRef]);
 
   return (
     <Animated.View
@@ -216,7 +223,29 @@ const MainLayout = ({ navigation }) => {
 
       {/* Content */}
       <View style={styles.content}>
-        <Text style={{ color: 'black' }}>MainLayout 1</Text>
+        <FlatList
+          ref={flatListRef}
+          horizontal
+          scrollEnabled={false}
+          snapToInterval={SIZES.width}
+          snapToAlignment="center"
+          showsHorizontalScrollIndicator={false}
+          data={constants.bottom_tabs}
+          keyExtractor={item => `${item.id}`}
+          renderItem={({ item, index }) => {
+            return (
+              <View style={{ height: SIZES.height, width: SIZES.width }}>
+                {item.label === constants.screens.home && <Home />}
+                {item.label === constants.screens.search && <Search />}
+                {item.label === constants.screens.cart && <CartTab />}
+                {item.label === constants.screens.favourite && <Favourite />}
+                {item.label === constants.screens.notification && (
+                  <Notification />
+                )}
+              </View>
+            );
+          }}
+        />
       </View>
 
       {/* Footer */}
@@ -225,8 +254,8 @@ const MainLayout = ({ navigation }) => {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 4 }}
-          // colors={[COLORS.transparent, COLORS.lightGray1]}
-          colors={[COLORS.white2, COLORS.lightGray1]}
+          colors={[COLORS.transparent, COLORS.lightGray1]}
+          // colors={[COLORS.white2, COLORS.lightGray1]}
           style={styles.shadow}
         />
 
@@ -327,6 +356,7 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: 'flex-end',
     // backgroundColor: 'red',
+    // borderWidth: 1,
   },
   shadow: {
     position: 'absolute',
@@ -342,7 +372,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingHorizontal: SIZES.radius,
-    paddingBottom: 10,
+    ...Platform.select({
+      android: { paddingBottom: 0 },
+      ios: { paddingBottom: 10 },
+    }),
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: COLORS.white,
