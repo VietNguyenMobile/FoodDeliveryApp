@@ -7,6 +7,7 @@ import {
   ImageStyle,
   TouchableOpacity,
   StyleSheet,
+  ImageSourcePropType,
 } from 'react-native';
 import { COLORS, FONTS, SIZES, icons } from '../constants';
 
@@ -21,7 +22,7 @@ type HorizontalFoodCardProps = {
     price: number;
     calories: number;
     isFavourite: boolean;
-    image: string;
+    image: ImageSourcePropType;
   };
 
   onPress: () => {};
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
   name: {
     ...FONTS.h3,
     fontSize: 17,
+    color: 'black',
   },
   description: {
     color: COLORS.darkGray2,
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
   price: {
     marginTop: SIZES.base,
     ...FONTS.h2,
+    color: 'black',
   },
   calories: {
     flexDirection: 'row',

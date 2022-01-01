@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   name: {
     ...FONTS.h3,
     // fontSize: 17,
+    color: 'black',
   },
   description: {
     color: COLORS.darkGray2,
@@ -119,8 +120,8 @@ const styles = StyleSheet.create({
   price: {
     marginTop: SIZES.radius,
     ...FONTS.h2,
+    color: 'black',
   },
-
   textCalories: {
     color: COLORS.darkGray2,
     ...FONTS.body5,

@@ -6,13 +6,14 @@ import {
   StyleSheet,
   TouchableNativeFeedback,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { COLORS, FONTS, SIZES } from '../constants';
 
 type TabButtonProps = {
   label: string;
-  icon: string;
+  icon: ImageSourcePropType;
   isFocused: boolean;
   outerContainerStyle: ViewStyle;
   innerContainerStyle: ViewStyle;

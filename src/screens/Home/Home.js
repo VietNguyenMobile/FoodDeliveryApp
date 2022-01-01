@@ -12,6 +12,7 @@ import {
 import { FONTS, SIZES, COLORS, icons, dummyData } from '../../constants';
 import HorizontalFoodCard from '../../components/HorizontalFoodCard';
 import VerticalFoodCard from '../../components/VerticalFoodCard';
+import FilterModal from './FilterModal';
 
 const Section = ({ title, onPress, children }) => {
   return (
@@ -35,6 +36,7 @@ const Home = () => {
   const [menuList, setMenuList] = useState([]);
   const [recommends, setRecommends] = useState([]);
   const [popular, setPopular] = useState([]);
+  const [showFilterModal, setShowFilterModal] = useState(false);
 
   useEffect(() => {
     handleChangeCategory(selectedCategoryId, selectedMenuType);
@@ -80,7 +82,7 @@ const Home = () => {
           placeholder="search food..."
         />
         {/* Filter Button */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setShowFilterModal(true)}>
           <Image source={icons.filter} style={styles.iconFilter} />
         </TouchableOpacity>
       </View>
@@ -252,7 +254,9 @@ const Home = () => {
             marginTop: SIZES.base,
             alignItems: 'center',
           }}>
-          <Text style={{ ...FONTS.h3 }}>{dummyData.myProfile.address}</Text>
+          <Text style={{ ...FONTS.h3, color: 'black' }}>
+            {dummyData.myProfile.address}
+          </Text>
           <Image
             source={icons.down_arrow}
             style={{ marginLeft: SIZES.base, height: 20, width: 20 }}
@@ -266,6 +270,15 @@ const Home = () => {
     <View style={styles.container}>
       {/* Search */}
       {renderSearch()}
+
+      {/* Filter */}
+      {showFilterModal && (
+        <FilterModal
+          isVisible={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
+        />
+      )}
+
       {/* List */}
       <FlatList
         data={menuList}
@@ -361,6 +374,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     flex: 1,
     ...FONTS.h3,
+    color: 'black',
   },
   sectionShowAll: {
     color: COLORS.primary,
