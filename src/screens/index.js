@@ -1,5 +1,8 @@
 import MainLayout from "./MainLayout"
 
+// Authentication
+import AuthLayout from "./Authentication/AuthLayout";
+
 // Home
 import Home from "./Home/Home"
 // import FilterModal from "./Home/FilterModal";
@@ -22,5 +25,6 @@ export {
     Search,
     CartTab,
     Favourite,
-    Notification
+    Notification,
+    AuthLayout,
 }

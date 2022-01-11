@@ -24,7 +24,7 @@ const OnBoarding: FunctionComponent<OnBoardingProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onViewChangeRef = useRef(({ viewableItems, changed }) => {
-    console.log('viewableItems: ', viewableItems);
+    // console.log('viewableItems: ', viewableItems);
     setCurrentIndex(viewableItems[0].index);
   });
 
