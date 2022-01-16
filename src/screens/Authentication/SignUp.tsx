@@ -227,7 +227,7 @@ const SignUp: FunctionComponent<SignUpProps> = ({ navigation, route }) => {
           containerStyle={{
             ...styles.facebook,
             backgroundColor: COLORS.lightGray2,
-            marginTop: SIZES.base,
+            marginTop: SIZES.base * 2,
           }}
           icon={icons.google}
           iconPosition="LEFT"
@@ -277,11 +277,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   facebook: {
-    height: 50,
+    height: 60,
     alignItems: 'center',
     borderRadius: SIZES.radius,
     backgroundColor: COLORS.blue,
-    marginTop: SIZES.base,
+    // marginTop: SIZES.base,
+    marginTop: SIZES.base * 2,
   },
 });
 

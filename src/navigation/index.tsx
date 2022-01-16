@@ -33,7 +33,7 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="SignUp">
+        initialRouteName="ForgotPassword">
         <MainStack.Screen name="Home" component={CustomDrawer} />
         <MainStack.Screen name="Onboarding" component={OnBoarding} />
         <MainStack.Screen name="SignUp" component={SignUp} />
