@@ -156,6 +156,7 @@ const FilterModal: FunctionComponent<FilterModalProps> = ({
               <TextIconButton
                 key={`Ratings-${index}`}
                 label={item.label}
+                iconPosition="LEFT"
                 labelStyle={{
                   color: item.id == ratings ? COLORS.white : COLORS.gray,
                 }}

@@ -7,6 +7,8 @@ import CustomDrawer from './CustomDrawer';
 import OnBoarding from '../screens/OnBoarding/OnBoarding';
 import SignUp from '../screens/Authentication/SignUp';
 import SignIn from '../screens/Authentication/SignIn';
+import ForgotPassword from '../screens/Authentication/ForgotPassword';
+import OTP from '../screens/Authentication/Otp';
 
 export type MainParamType = {
   // MainLayout: undefined;
@@ -18,6 +20,8 @@ export type MainParamType = {
   SignUp: undefined;
   SignIn: undefined;
   Onboarding: undefined;
+  ForgotPassword: undefined;
+  OTP: undefined;
 };
 
 const MainStack = createStackNavigator<MainParamType>();
@@ -29,11 +33,13 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Onboarding">
+        initialRouteName="SignUp">
         <MainStack.Screen name="Home" component={CustomDrawer} />
         <MainStack.Screen name="Onboarding" component={OnBoarding} />
         <MainStack.Screen name="SignUp" component={SignUp} />
         <MainStack.Screen name="SignIn" component={SignIn} />
+        <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <MainStack.Screen name="OTP" component={OTP} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

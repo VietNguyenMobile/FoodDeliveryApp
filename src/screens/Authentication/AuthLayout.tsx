@@ -26,7 +26,17 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = ({
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView
+        scrollEnabled={true}
+        style={{
+          flex: 1,
+          backgroundColor: COLORS.white,
+          // borderTopColor: colors.SHADOW,
+          // borderTopWidth: 1,
+        }}
+        enableAutomaticScroll={true}
         keyboardDismissMode="on-drag"
+        enableOnAndroid={true}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           flex: 1,
           paddingHorizontal: SIZES.padding,
@@ -64,7 +74,8 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: SIZES.padding,
+    // paddingVertical: SIZES.padding,
+    paddingTop: SIZES.padding,
     backgroundColor: COLORS.white,
     // backgroundColor: 'red',
   },

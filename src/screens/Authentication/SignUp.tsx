@@ -13,24 +13,40 @@ import {
 } from '../../components';
 import { utils } from '../../utils';
 
-type SignInProps = StackScreenProps<MainParamType, 'SignIn'>;
+type SignUpProps = StackScreenProps<MainParamType, 'SignUp'>;
 
-const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
+const SignUp: FunctionComponent<SignUpProps> = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
 
   const [saveMe, setSaveMe] = useState(false);
 
-  const isEnableSignIn = () => {
-    return email !== '' && password !== '' && emailError === '';
+  const [emailError, setEmailError] = useState('');
+  const [usernameError, setUserNameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const isEnableSignUp = () => {
+    return (
+      email !== '' &&
+      password !== '' &&
+      username !== '' &&
+      emailError === '' &&
+      passwordError === '' &&
+      usernameError === ''
+    );
   };
 
   return (
     <AuthLayout
-      title="Let's Sign You In"
-      subtitle="Welcome back, you've been missed">
+      title="Getting Started"
+      subtitle="Create an account to continue!"
+      titleContainerStyle={{
+        marginTop: SIZES.radius,
+      }}>
+      {/* Form Input And Sign Up */}
       <View style={styles.container}>
         {/* Form Inputs */}
         <FormInput
@@ -66,17 +82,55 @@ const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
             </View>
           }
         />
+        <FormInput
+          label="User Name"
+          keyboardType="default"
+          containerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          autoComplete="username"
+          onChange={value => {
+            //validate email
+            // utils.validateEmail(value, setEmailError);
+            setUserName(value);
+          }}
+          errorMsg={usernameError}
+          appendComponent={
+            <View style={styles.appendComponentEmail}>
+              <Image
+                source={
+                  username == '' || (username != '' && usernameError == '')
+                    ? icons.correct
+                    : icons.cancel
+                }
+                style={[
+                  styles.imageCorrect,
+                  {
+                    tintColor:
+                      username == ''
+                        ? COLORS.gray
+                        : username != '' && usernameError == ''
+                        ? COLORS.green
+                        : COLORS.red,
+                  },
+                ]}
+              />
+            </View>
+          }
+        />
 
         <FormInput
           label="Password"
           autoComplete="password"
           onChange={value => {
+            utils.validatePassword(value, setPasswordError);
             setPassword(value);
           }}
           containerStyle={{
             marginTop: SIZES.radius,
           }}
           secureTextEntry={!showPassword}
+          errorMsg={passwordError}
           appendComponent={
             <TouchableOpacity
               style={styles.appendComponentPassword}
@@ -98,31 +152,51 @@ const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
             onPress={() => navigation.navigate('ForgotPassword')}
           />
         </View>
-        {/* Sign In */}
+        {/* Sign Up */}
         <TextButton
-          label="Sign In"
-          disabled={isEnableSignIn() ? false : true}
+          label="Sign Up"
+          disabled={isEnableSignUp() ? false : true}
           buttonContainerStyle={{
             height: 55,
             alignItems: 'center',
             marginTop: SIZES.padding,
             borderRadius: SIZES.radius,
-            backgroundColor: isEnableSignIn()
+            backgroundColor: isEnableSignUp()
               ? COLORS.primary
               : COLORS.transparentPrimary,
           }}
+          onPress={() => navigation.navigate('OTP')}
         />
         {/* Sign Up */}
-        <View style={styles.rowSignUp}>
+
+        {/* <TextButton
+          label=" Sign Up"
+          buttonContainerStyle={{
+            backgroundColor: null,
+          }}
+          labelStyle={{
+            color: COLORS.primary,
+            ...FONTS.h3,
+          }}
+          onPress={() => navigation.navigate('OTP')}
+        /> */}
+
+        {/* Footer */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: SIZES.radius,
+            justifyContent: 'center',
+          }}>
           <Text
             style={{
               color: COLORS.darkGray,
               ...FONTS.body3,
             }}>
-            Don't have an account?
+            Already have an account?
           </Text>
           <TextButton
-            label=" Sign Up"
+            label=" Sing In"
             buttonContainerStyle={{
               backgroundColor: null,
             }}
@@ -130,46 +204,43 @@ const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
               color: COLORS.primary,
               ...FONTS.h3,
             }}
-            onPress={() => navigation.navigate('SignUp')}
+            onPress={() => navigation.goBack()}
           />
         </View>
-        {/* Footer */}
-        <View>
-          {/* Facebook */}
-          <TextIconButton
-            containerStyle={styles.facebook}
-            icon={icons.fb}
-            iconPosition="LEFT"
-            iconStyle={{
-              tintColor: COLORS.white,
-            }}
-            label="Continue With Facebook"
-            labelStyle={{
-              marginLeft: SIZES.radius,
-              color: COLORS.white,
-            }}
-            onPress={() => console.log('FB')}
-          />
-          {/* Google */}
-          <TextIconButton
-            containerStyle={{
-              ...styles.facebook,
-              backgroundColor: COLORS.lightGray2,
-              marginTop: SIZES.base,
-            }}
-            icon={icons.google}
-            iconPosition="LEFT"
-            iconStyle={{
-              tintColor: null,
-            }}
-            label="Continue With Google"
-            labelStyle={{
-              marginLeft: SIZES.radius,
-              color: COLORS.black,
-            }}
-            onPress={() => console.log('Google')}
-          />
-        </View>
+        {/* Facebook */}
+        <TextIconButton
+          containerStyle={styles.facebook}
+          icon={icons.fb}
+          iconPosition="LEFT"
+          iconStyle={{
+            tintColor: COLORS.white,
+          }}
+          label="Continue With Facebook"
+          labelStyle={{
+            marginLeft: SIZES.radius,
+            color: COLORS.white,
+          }}
+          onPress={() => console.log('FB')}
+        />
+        {/* Google */}
+        <TextIconButton
+          containerStyle={{
+            ...styles.facebook,
+            backgroundColor: COLORS.lightGray2,
+            marginTop: SIZES.base,
+          }}
+          icon={icons.google}
+          iconPosition="LEFT"
+          iconStyle={{
+            tintColor: null,
+          }}
+          label="Continue With Google"
+          labelStyle={{
+            marginLeft: SIZES.radius,
+            color: COLORS.black,
+          }}
+          onPress={() => console.log('Google')}
+        />
       </View>
     </AuthLayout>
   );
@@ -178,7 +249,7 @@ const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: SIZES.padding * 2,
+    marginTop: SIZES.padding,
   },
   appendComponentEmail: {
     justifyContent: 'center',
@@ -214,4 +285,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default SignUp;

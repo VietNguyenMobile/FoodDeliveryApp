@@ -14,6 +14,7 @@ type TextButtonProps = {
   labelStyle: TextStyle;
   buttonContainerStyle: ViewStyle;
   onPress: () => void;
+  disabled: boolean;
 };
 
 const TextButton: FunctionComponent<TextButtonProps> = ({
@@ -21,10 +22,12 @@ const TextButton: FunctionComponent<TextButtonProps> = ({
   labelStyle,
   buttonContainerStyle,
   onPress,
+  disabled
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={disabled}
       style={{
         alignItems: 'center',
         justifyContent: 'center',
