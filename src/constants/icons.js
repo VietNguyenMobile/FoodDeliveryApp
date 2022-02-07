@@ -41,7 +41,10 @@ const check_circle = require('../assets/icons/check_circle.png');
 const map = require('../assets/icons/map.png');
 const navigator = require('../assets/icons/navigator.png');
 const navigator1 = require('../assets/icons/navigator1.png');
+const globe = require('../assets/icons/globe.png');
 const location_pin = require('../assets/icons/location_pin.png');
+const focus = require('../assets/icons/focus.png');
+const call = require('../assets/icons/call.png');
 
 export default {
   coupon,
@@ -88,4 +91,7 @@ export default {
   navigator,
   navigator1,
   location_pin,
+  globe,
+  call,
+  focus,
 };
