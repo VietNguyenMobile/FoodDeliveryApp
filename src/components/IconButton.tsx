@@ -4,13 +4,15 @@ import {
   ImagePropTypes,
   TouchableOpacity,
   Image,
+  ImageStyle,
+  ImageSourcePropType,
 } from 'react-native';
 import { COLORS } from '../constants';
 
 type IconButtonProps = {
   containerStyle: ViewStyle;
-  icon: ImagePropTypes;
-  iconStyle: ViewStyle;
+  icon: ImageSourcePropType;
+  iconStyle: ImageStyle;
   onPress: () => void;
 };
 

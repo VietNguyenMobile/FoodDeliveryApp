@@ -106,27 +106,60 @@ const tags = [
 
 const onboarding_screens = [
   {
-      id: 1,
-      backgroundImage: require("../assets/images/background_01.png"),
-      bannerImage: require("../assets/images/favourite_food.png"),
-      title: "Choose a Favourite Food",
-      description: "When you oder Eat Steet, we’ll hook you up with exclusive coupon, specials and rewards"
+    id: 1,
+    backgroundImage: require('../assets/images/background_01.png'),
+    bannerImage: require('../assets/images/favourite_food.png'),
+    title: 'Choose a Favourite Food',
+    description:
+      'When you oder Eat Steet, we’ll hook you up with exclusive coupon, specials and rewards',
   },
   {
-      id: 2,
-      backgroundImage: require("../assets/images/background_02.png"),
-      bannerImage: require("../assets/images/hot_delivery.png"),
-      title: "Hot Delivery to Home",
-      description: "We make food ordering fasr, simple and free-no matter if you order online or cash"
+    id: 2,
+    backgroundImage: require('../assets/images/background_02.png'),
+    bannerImage: require('../assets/images/hot_delivery.png'),
+    title: 'Hot Delivery to Home',
+    description:
+      'We make food ordering fasr, simple and free-no matter if you order online or cash',
   },
   {
-      id: 3,
-      backgroundImage: require("../assets/images/background_01.png"),
-      bannerImage: require("../assets/images/great_food.png"),
-      title: "Receive the Great Food",
-      description: "You’ll receive the great food within a hour. And get free delivery credits for every order."
-  }
-]
+    id: 3,
+    backgroundImage: require('../assets/images/background_01.png'),
+    bannerImage: require('../assets/images/great_food.png'),
+    title: 'Receive the Great Food',
+    description:
+      'You’ll receive the great food within a hour. And get free delivery credits for every order.',
+  },
+];
+
+const track_order_status = [
+  {
+    id: 1,
+    title: 'Order Confirmed',
+    sub_title: 'Your order has been received',
+  },
+  {
+    id: 2,
+    title: 'Order Prepared',
+    sub_title: 'Your order has been prepared',
+  },
+  {
+    id: 3,
+    title: 'Delivery in Progress',
+    sub_title: 'Hang on! Your food is on the way',
+  },
+  {
+    id: 4,
+    title: 'Delivered',
+    sub_title: 'Enjoy your meal!',
+  },
+  {
+    id: 5,
+    title: 'Rate Us',
+    sub_title: 'Help us improve our service',
+  },
+];
+
+const GOOGLE_MAP_API_KEY = 'AIzaSyDvJgi_iKQ1poEqEKGgi9HkBHPH5htlI-g';
 
 export default {
   onboarding_screens,
@@ -135,4 +168,6 @@ export default {
   delivery_time,
   ratings,
   tags,
+  track_order_status,
+  GOOGLE_MAP_API_KEY
 };

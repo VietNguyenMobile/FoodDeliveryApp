@@ -26,6 +26,22 @@ const eye = require('../assets/icons/eye.png');
 const fb = require('../assets/icons/fb.png');
 const google = require('../assets/icons/google.png');
 const cancel = require('../assets/icons/cancel.png');
+const back = require('../assets/icons/back.png');
+const clock = require('../assets/icons/clock.png');
+const dollar = require('../assets/icons/dollar.png');
+const minus = require('../assets/icons/minus.png');
+const plus = require('../assets/icons/plus.png');
+const deleteIcon = require('../assets/icons/delete.png');
+const check_on = require('../assets/icons/check_on.png');
+const check_off = require('../assets/icons/check_off.png');
+const location1 = require('../assets/icons/location1.png');
+const discount = require('../assets/icons/discount.png');
+const dotted_line = require('../assets/icons/dotted_line.png');
+const check_circle = require('../assets/icons/check_circle.png');
+const map = require('../assets/icons/map.png');
+const navigator = require('../assets/icons/navigator.png');
+const navigator1 = require('../assets/icons/navigator1.png');
+const location_pin = require('../assets/icons/location_pin.png');
 
 export default {
   coupon,
@@ -56,4 +72,20 @@ export default {
   google,
   fb,
   cancel,
+  back,
+  clock,
+  dollar,
+  minus,
+  plus,
+  deleteIcon,
+  check_on,
+  check_off,
+  location1,
+  discount,
+  check_circle,
+  dotted_line,
+  map,
+  navigator,
+  navigator1,
+  location_pin,
 };

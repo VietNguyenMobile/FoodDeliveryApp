@@ -14,7 +14,6 @@ import {
   TextIconButton,
 } from '../../components';
 import { utils } from '../../utils';
-import { color } from 'react-native-reanimated';
 
 type ForgotPasswordProps = StackScreenProps<MainParamType, 'ForgotPassword'>;
 
@@ -22,7 +21,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = ({
   navigation,
   route,
 }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState('');
 
   const insets = useSafeAreaInsets();

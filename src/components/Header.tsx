@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, ViewStyle, StyleSheet } from 'react-native';
+import { View, Text, ViewStyle, StyleSheet, TextStyle } from 'react-native';
 import { FONTS } from '../constants';
 
 type HeaderProps = {
@@ -7,6 +7,7 @@ type HeaderProps = {
   containerStyle: ViewStyle;
   leftComponent: Element;
   rightComponent: Element;
+  titleStyle: TextStyle;
 };
 
 const Header: FunctionComponent<HeaderProps> = ({
@@ -14,6 +15,7 @@ const Header: FunctionComponent<HeaderProps> = ({
   containerStyle,
   leftComponent,
   rightComponent,
+  titleStyle,
 }) => {
   return (
     <View style={{ ...containerStyle }}>
@@ -21,7 +23,9 @@ const Header: FunctionComponent<HeaderProps> = ({
       {leftComponent}
       {/* Title */}
       <View style={styles.containerTitle}>
-        <Text style={{ ...FONTS.h3, color: 'black' }}>{title}</Text>
+        <Text style={[{ ...FONTS.h3, color: 'black' }, titleStyle]}>
+          {title}
+        </Text>
       </View>
       {/* Right */}
       {rightComponent}

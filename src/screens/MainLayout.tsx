@@ -146,10 +146,10 @@ const MainLayout = ({ navigation }) => {
     if (selectedTab == constants.screens.home) {
       flatListRef?.current?.scrollToIndex({ index: 0, animated: false });
       homeTabFlex.value = withTiming(4, { duration: 500 });
-      homeTabColor.value = withTiming(COLORS.primary, { duration: 500 });
+      homeTabColor.value = withTiming(COLORS.primary, { duration: 500 }).toString();
     } else {
       homeTabFlex.value = withTiming(1, { duration: 500 });
-      homeTabColor.value = withTiming(COLORS.white, { duration: 500 });
+      homeTabColor.value = withTiming(COLORS.white, { duration: 500 }).toString();
     }
 
     if (selectedTab == constants.screens.search) {

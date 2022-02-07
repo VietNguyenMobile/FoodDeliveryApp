@@ -14,9 +14,11 @@ type FormInputProps = TextInputProps & {
   containerStyle: ViewStyle;
   label: string;
   inputStyle: ViewStyle;
+  inputContainerStyle: ViewStyle;
   prependComponent: any;
   appendComponent: any;
   errorMsg: string;
+  onChange: (text: string) => void;
 };
 
 const FormInput: FunctionComponent<FormInputProps> = ({
@@ -32,6 +34,8 @@ const FormInput: FunctionComponent<FormInputProps> = ({
   autoComplete = 'off',
   autoCapitalize = 'none',
   errorMsg = '',
+  maxLength,
+  inputContainerStyle,
 }) => {
   return (
     <View style={{ ...containerStyle }}>
@@ -41,7 +45,7 @@ const FormInput: FunctionComponent<FormInputProps> = ({
         <Text style={{ color: COLORS.red, ...FONTS.body4 }}>{errorMsg}</Text>
       </View>
       {/* Text input */}
-      <View style={styles.containerInput}>
+      <View style={[styles.containerInput, { ...inputContainerStyle }]}>
         {prependComponent}
         <TextInput
           style={{
@@ -55,6 +59,7 @@ const FormInput: FunctionComponent<FormInputProps> = ({
           autoComplete={autoComplete}
           autoCapitalize={autoCapitalize}
           onChangeText={text => onChange(text)}
+          maxLength={maxLength}
         />
         {appendComponent}
       </View>
@@ -65,9 +70,9 @@ const FormInput: FunctionComponent<FormInputProps> = ({
 const styles = StyleSheet.create({
   containerInput: {
     flexDirection: 'row',
-    height: 55,
+    height: SIZES.height > 800 ? 55 : 45,
     paddingHorizontal: SIZES.padding,
-    marginTop: SIZES.base,
+    marginTop: SIZES.height > 800 ? SIZES.base : 0,
     borderRadius: SIZES.radius,
     backgroundColor: COLORS.lightGray2,
   },
