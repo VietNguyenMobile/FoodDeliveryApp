@@ -35,12 +35,10 @@ import {
 } from '../constants';
 
 const MainLayout = ({ navigation }) => {
-  //   console.log('drawerAnimatedStyle: ', drawerAnimatedStyle);
-
   const flatListRef = useRef<FlatList<any>>();
   const isDrawerOpen = useDrawerStatus();
   const sv = useSharedValue(0);
-  //   console.log('isDrawerOpen: ', isDrawerOpen);
+
   useEffect(() => {
     if (isDrawerOpen === 'open') {
       sv.value = withTiming(0.6, { duration: 50 });
@@ -64,13 +62,13 @@ const MainLayout = ({ navigation }) => {
   });
 
   useEffect(() => {
-    // console.log('setTabSelected: ', constants.screens.home);
     dispatch(setTabSelected(constants.screens.home));
   }, []);
 
   const selectedTab = useSelector<RootState, string>(
     state => state.tab.selectedTab,
   );
+  // console.log('selectedTab: ', selectedTab)
   const dispatch: AppDispatch = useDispatch();
   console.log('selectedTab 000: ', selectedTab);
 
@@ -146,10 +144,14 @@ const MainLayout = ({ navigation }) => {
     if (selectedTab == constants.screens.home) {
       flatListRef?.current?.scrollToIndex({ index: 0, animated: false });
       homeTabFlex.value = withTiming(4, { duration: 500 });
-      homeTabColor.value = withTiming(COLORS.primary, { duration: 500 }).toString();
+      homeTabColor.value = withTiming(COLORS.primary, {
+        duration: 500,
+      });
     } else {
       homeTabFlex.value = withTiming(1, { duration: 500 });
-      homeTabColor.value = withTiming(COLORS.white, { duration: 500 }).toString();
+      homeTabColor.value = withTiming(COLORS.white, {
+        duration: 500,
+      });
     }
 
     if (selectedTab == constants.screens.search) {
@@ -235,7 +237,9 @@ const MainLayout = ({ navigation }) => {
           renderItem={({ item, index }) => {
             return (
               <View style={{ height: SIZES.height, width: SIZES.width }}>
-                {item.label === constants.screens.home && <Home />}
+                {item.label === constants.screens.home && (
+                  <Home navigation={navigation} />
+                )}
                 {item.label === constants.screens.search && <Search />}
                 {item.label === constants.screens.cart && <CartTab />}
                 {item.label === constants.screens.favourite && <Favourite />}

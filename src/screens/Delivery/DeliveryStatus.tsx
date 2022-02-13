@@ -39,7 +39,7 @@ const DeliveryStatus: FunctionComponent<DeliveryStatusProps> = ({
 }) => {
   const insets = useSafeAreaInsets();
 
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(4);
 
   const renderHeader = () => {
     return (
@@ -228,7 +228,7 @@ const DeliveryStatus: FunctionComponent<DeliveryStatusProps> = ({
           <TextButton
             buttonContainerStyle={{ height: 55, borderRadius: SIZES.radius }}
             label="DONE"
-            onPress={() => navigation.navigate('FoodDetail')}
+            onPress={() => navigation.navigate('Home')}
           />
         )}
       </View>

@@ -3,8 +3,9 @@ import images from './images';
 import icons from './icons';
 
 const myProfile = {
-  name: 'ByProgrammers',
-  profile_image: images.profile,
+  name: 'Viet Nguyen',
+  // profile_image: images.profile,
+  profile_image: images.profile1,
   address: 'No. 88, Jln Padungan, Kuching',
 };
 
@@ -81,8 +82,7 @@ const sizes = [
 const vegBiryani = {
   id: 3,
   name: 'Veg Biryani',
-  description:
-    'A popular spice and vegetables mixed favoured rice dish which is typically prepared by layering the biryani gravy and basmati rice in flat bottom vessel.',
+  description: 'A popular spice and vegetables mixed favoured rice dish.',
   categories: [1, 2, 3],
   price: 10.99,
   calories: 78,

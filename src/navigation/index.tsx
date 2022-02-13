@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-// import { MainLayout } from '../screens';
 
 import CustomDrawer from './CustomDrawer';
 import OnBoarding from '../screens/OnBoarding/OnBoarding';
@@ -18,18 +17,21 @@ import Success from '../screens/Cart/Success';
 import DeliveryStatus from '../screens/Delivery/DeliveryStatus';
 import Map from '../screens/Delivery/Map';
 
-export type MainParamType = {
-  // MainLayout: undefined;
-  Home: undefined;
-  // Search: undefined;
-  // CartTab: undefined;
-  // Favourite: undefined;
-  // Notification: undefined;
+export type AuthParamType = {
+  Onboarding: undefined;
   SignUp: undefined;
   SignIn: undefined;
-  Onboarding: undefined;
   ForgotPassword: undefined;
   OTP: undefined;
+};
+
+export type MainParamType = {
+  Home: undefined;
+  // SignUp: undefined;
+  // SignIn: undefined;
+  // Onboarding: undefined;
+  // ForgotPassword: undefined;
+  // OTP: undefined;
   FoodDetail: undefined;
   MyCart: undefined;
   MyCard: undefined;
@@ -54,39 +56,72 @@ export type MainParamType = {
   Map: undefined;
 };
 
+export type RootStackType = {
+  Main: undefined;
+  Auth: undefined;
+};
+
+const RootStack = createStackNavigator<RootStackType>();
+
 const MainStack = createStackNavigator<MainParamType>();
+
+const AuthStack = createStackNavigator<AuthParamType>();
+
+const AuthNavigator = () => {
+  return (
+    <AuthStack.Navigator
+      initialRouteName="Onboarding"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <AuthStack.Screen name="Onboarding" component={OnBoarding} />
+      <AuthStack.Screen name="SignUp" component={SignUp} />
+      <AuthStack.Screen name="SignIn" component={SignIn} />
+      <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <AuthStack.Screen name="OTP" component={OTP} />
+    </AuthStack.Navigator>
+  );
+};
+
+const MainNavigator = () => {
+  return (
+    <MainStack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <MainStack.Screen name="Home" component={CustomDrawer} />
+      <MainStack.Screen name="FoodDetail" component={FoodDetail} />
+      <MainStack.Screen name="MyCart" component={MyCart} />
+      <MainStack.Screen name="MyCard" component={MyCard} />
+      <MainStack.Screen name="AddCard" component={AddCard} />
+      <MainStack.Screen name="Checkout" component={Checkout} />
+      <MainStack.Screen
+        name="Success"
+        component={Success}
+        options={{ gestureEnabled: false }}
+      />
+      <MainStack.Screen
+        name="DeliveryStatus"
+        component={DeliveryStatus}
+        options={{ gestureEnabled: false }}
+      />
+      <MainStack.Screen name="Map" component={Map} />
+    </MainStack.Navigator>
+  );
+};
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <MainStack.Navigator
+      <RootStack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="MyCard">
-        <MainStack.Screen name="Home" component={CustomDrawer} />
-        <MainStack.Screen name="Onboarding" component={OnBoarding} />
-        <MainStack.Screen name="SignUp" component={SignUp} />
-        <MainStack.Screen name="SignIn" component={SignIn} />
-        <MainStack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <MainStack.Screen name="OTP" component={OTP} />
-        <MainStack.Screen name="FoodDetail" component={FoodDetail} />
-        <MainStack.Screen name="MyCart" component={MyCart} />
-        <MainStack.Screen name="MyCard" component={MyCard} />
-        <MainStack.Screen name="AddCard" component={AddCard} />
-        <MainStack.Screen name="Checkout" component={Checkout} />
-        <MainStack.Screen
-          name="Success"
-          component={Success}
-          options={{ gestureEnabled: false }}
-        />
-        <MainStack.Screen
-          name="DeliveryStatus"
-          component={DeliveryStatus}
-          options={{ gestureEnabled: false }}
-        />
-        <MainStack.Screen name="Map" component={Map} />
-      </MainStack.Navigator>
+        initialRouteName="Auth">
+        <RootStack.Screen name="Auth" component={AuthNavigator} />
+        <RootStack.Screen name="Main" component={MainNavigator} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

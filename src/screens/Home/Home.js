@@ -30,7 +30,7 @@ const Section = ({ title, onPress, children }) => {
   );
 };
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [selectedMenuType, setSelectedMenuType] = useState(1);
   const [menuList, setMenuList] = useState([]);
@@ -178,7 +178,10 @@ const Home = () => {
                   index === recommends.length - 1 ? SIZES.padding : 0,
               }}
               item={item}
-              onPress={() => console.log('Vertical Food Card')}
+              onPress={() => {
+                console.log('Vertical Food Card');
+                navigation.navigate('FoodDetail');
+              }}
             />
           )}
         />

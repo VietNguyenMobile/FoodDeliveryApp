@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import AuthLayout from './AuthLayout';
 
 import { StackScreenProps } from '@react-navigation/stack';
-import { MainParamType } from '../../navigation';
+import { AuthParamType } from '../../navigation';
 import { FONTS, SIZES, COLORS, icons } from '../../constants';
 import {
   FormInput,
@@ -13,7 +13,7 @@ import {
 } from '../../components';
 import { utils } from '../../utils';
 
-type SignInProps = StackScreenProps<MainParamType, 'SignIn'>;
+type SignInProps = StackScreenProps<AuthParamType, 'SignIn'>;
 
 const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -111,6 +111,7 @@ const SignIn: FunctionComponent<SignInProps> = ({ navigation, route }) => {
               ? COLORS.primary
               : COLORS.transparentPrimary,
           }}
+          onPress={() => navigation.navigate('Main')}
         />
         {/* Sign Up */}
         <View style={styles.rowSignUp}>

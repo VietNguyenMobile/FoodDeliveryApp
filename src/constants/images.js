@@ -1,4 +1,5 @@
 const profile = require('../assets/images/profile.png');
+const profile1 = require('../assets/images/profile1.jpg');
 const logo_02 = require('../assets/images/logo_02.png');
 const logo_01 = require('../assets/images/logo_01.png');
 const background_01 = require('../assets/images/background_01.png');
@@ -20,4 +21,5 @@ export default {
   hot_delivery,
   card,
   success,
+  profile1,
 };

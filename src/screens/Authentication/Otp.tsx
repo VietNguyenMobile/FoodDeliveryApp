@@ -81,7 +81,7 @@ const Otp: FunctionComponent<OTPProps> = ({ navigation, route }) => {
           buttonContainerStyle={{
             ...styles.continueBtn,
           }}
-          onPress={() => console.log('Continue')}
+          onPress={() => navigation.navigate('Main')}
         />
         <View style={{ marginTop: SIZES.padding, alignItems: 'center' }}>
           <Text style={{ color: COLORS.darkGray, ...FONTS.body3 }}>

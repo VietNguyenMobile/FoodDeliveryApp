@@ -31,7 +31,6 @@ type CardItemProps = {
 const CardItem: FunctionComponent<CardItemProps> = ({
   item,
   isSelected,
-  key,
   onPress,
 }) => {
   return (

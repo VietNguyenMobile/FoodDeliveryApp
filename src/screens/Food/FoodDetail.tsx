@@ -28,7 +28,7 @@ import {
   LineDivider,
   Rating,
   StepperInput,
-  FooterTotal
+  FooterTotal,
 } from '../../components';
 
 type FoodDetailProps = StackScreenProps<MainParamType, 'FoodDetail'>;
@@ -66,7 +66,7 @@ const FoodDetail: FunctionComponent<FoodDetailProps> = ({
               }),
               tintColor: COLORS.gray2,
             }}
-            onPress={() => console.log('Back')}
+            onPress={() => navigation.navigate('Home')}
           />
         }
         rightComponent={<CartQuantityButton quantity={3} />}

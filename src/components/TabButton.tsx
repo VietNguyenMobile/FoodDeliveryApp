@@ -28,7 +28,7 @@ const TabButton: FunctionComponent<TabButtonProps> = ({
   outerContainerStyle,
   innerContainerStyle,
 }) => {
-  // console.log('label: ', label);
+  
   return (
     <TouchableNativeFeedback onPress={onPress}>
       <Animated.View style={[styles.container, outerContainerStyle]}>
